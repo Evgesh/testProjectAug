@@ -1,0 +1,13 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer">
+		<vbox sclass="sectionTitle">
+			<label hflex="1" value="Выберите пункт меню:"/>
+			<separator/>
+			<separator/>
+			<button label="Список пользователей"
+					hflex="1"
+					width="200px"
+					href="/zulUI/usersList.zul"/>
+		</vbox>
+	</window>
+</zk>

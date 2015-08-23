@@ -1,0 +1,61 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./userEditor" ?>
+<zk>
+    <window title="Редактор" id="userEditor" border="normal" width="30%"
+            apply="controller.UserEditorController" mode="modal"
+            maximizable="false" closable="true">
+        <panel width="100%">
+            <panelchildren>
+                <separator/>
+                <grid>
+                    <columns>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <vlayout>
+                                <label value="Имя" />
+                                <textbox id="name" hflex="1"
+                                         value="@{controller.selectedUser.name, access='both', save-when=self.onChange}"
+                                         mold="rounded" />
+                            </vlayout>
+                        </row>
+                        <row>
+                            <vlayout>
+                                <label value="Возраст"/>
+                                <intbox id="age" hflex="1"
+                                         value="@{controller.selectedUser.age, access='both', save-when=self.onChange}"
+                                         mold="rounded" />
+                            </vlayout>
+                        </row>
+                        <row>
+                            <vlayout>
+                                <label value="День регистрации"/>
+                                <datebox id="createDate" hflex="1"
+                                         disabled="true"
+                                         value="@{controller.selectedUser.createdDate}"
+                                         readonly="true"/>
+                            </vlayout>
+                        </row>
+                        <row>
+                            <vlayout>
+                                <label value="Администратор"/>
+                                <checkbox id="isAdmin" hflex="1"
+                                          checked="@{controller.selectedUser.isAdmin}"
+                                          value="@{controller.selectedUser.isAdmin, access='both'}"/>
+                            </vlayout>
+                        </row>
+
+                    </rows>
+                </grid>
+            </panelchildren>
+        </panel>
+        <separator />
+        <separator />
+        <separator />
+        <div align="center">
+            <button label="Save" mold="trendy" id="save"/>
+            <button label="Cancel" mold="trendy" id="cancel"/>
+        </div>
+        <separator />
+    </window>
+</zk>

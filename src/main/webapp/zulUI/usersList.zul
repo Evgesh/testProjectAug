@@ -1,0 +1,65 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./usersList" ?>
+<window width="100%" border="none" id="usersList"
+        apply="controller.UserListController">
+    <separator/>
+    <div width="100%">
+        <div sclass="sectionTitle">
+            <separator />
+            <button label="Меню" mold="trendy" id="btnIndex" href="index.zul"/>
+            <separator/>
+            <separator/>
+            <separator/>
+            <hlayout>
+                <label value="Имя:"/>
+                <textbox id="searchName" value="@{controller.searchName, access='both', save-when='self.onChange'}"/>
+                <label value="Возраст:"/>
+                <intbox id="searchAge" value="@{controller.searchAge, access='both', save-when='self.onChange'}"/>
+                <label value="Дата регистрации c:"/>
+                <datebox id="searchDateFrom" value="@{controller.searchDateFrom, save-when='self.onChange'}"/>
+                <label value=" по:"/>
+                <datebox id="searchDateTo" value="@{controller.searchDateTo, save-when='self.onChange'}"/>
+                <button label="Поиск" id="btnSearch" mold="trendy"
+                        forward="onClick=userListBox.onSearch"/>
+            </hlayout>
+            <separator/>
+            <separator/>
+            <button label="Добавить пользователя" id="btnNew" mold="trendy"/>
+        </div>
+    </div>
+    <separator />
+    <vbox>
+        <listbox id="userListBox" model="@{controller.userslist}"
+                 selectedItem="@{controller.selectedUser}"
+                 emptyMessage="Нет данных">
+            <listhead sizable="true">
+                <listheader align="center"/>
+                <listheader label="ID" align="center"/>
+                <listheader label="Имя"/>
+                <listheader label="Возраст" align="center"/>
+                <listheader label="Дата создания"/>
+                <listheader label="Администратор" align="center"/>
+                <listheader align="center"/>
+            </listhead>
+
+            <listitem self="@{each='user'}" value="@{user}">
+                <listcell>
+                    <button label="Редактировать" forward="onClick=userListBox.onEdit" mold="trendy"/>
+                </listcell>
+                <listcell label="@{user.id}"/>
+                <listcell label="@{user.name}"/>
+                <listcell label="@{user.age}"/>
+                <listcell label="@{user.createdDate}"/>
+                <listcell>
+                    <checkbox disabled="true" checked="@{user.isAdmin}"/>
+                </listcell>
+                <listcell>
+                    <button label="Удалить" forward="onClick=userListBox.onDelete" mold="trendy"/>
+                </listcell>
+            </listitem>
+
+        </listbox>
+        <paging id="userPaging" pageSize="@{controller.pageSize}"
+                totalSize="@{controller.totalSize, load-when=self.onChange}"
+                activePage="@{controller.activePage, load-when=self.onChange, save-when=self.onChange}"/>
+    </vbox>
+</window>
